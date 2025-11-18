@@ -1,55 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Badges</title>
   <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/badges.js"></script>
 </head>
 
 <body>
   <div class="badge-container">
-    <h1>Your Wish Sparks</h1>
+    <h1>Your Stellar Badges</h1>
+    <p class="subtitle">Complete missions to unlock all five badges!</p>
 
     <div class="badge-grid">
-      <div class="badge" id="badge_dino">
-        <img src="assets/icons/dino.png">
-        <p>Spark of Laughter</p>
+
+      <div class="badge" id="badge1">
+        <img src="assets/badge1.png" alt="Dino Putt Badge">
+        <p>Dino Putt</p>
       </div>
 
-      <div class="badge" id="badge_elmer">
-        <img src="assets/icons/elmer.png">
-        <p>Spark of Dreams</p>
+      <div class="badge" id="badge2">
+        <img src="assets/badge2.png" alt="Ol' Elmer Badge">
+        <p>Ol’ Elmer</p>
       </div>
 
-      <div class="badge" id="badge_castle">
-        <img src="assets/icons/castle.png">
-        <p>Spark of Hope</p>
+      <div class="badge" id="badge3">
+        <img src="assets/badge3.png" alt="Castle Badge">
+        <p>Castle of Miracles</p>
       </div>
 
-      <div class="badge" id="badge_icecream">
-        <img src="assets/icons/icecream.png">
-        <p>Spark of Joy</p>
+      <div class="badge" id="badge4">
+        <img src="assets/badge4.png" alt="Henri’s Badge">
+        <p>Henri’s Ice Cream</p>
       </div>
 
-      <div class="badge" id="badge_arcade">
-        <img src="assets/icons/arcade.png">
-        <p>Spark of Play</p>
+      <div class="badge" id="badge5">
+        <img src="assets/badge5.png" alt="Amberville Badge">
+        <p>Amberville Arcade</p>
       </div>
+
     </div>
 
-    <a href="map.html" class="mission-btn">Back to Map</a>
+    <a class="back-btn" href="map.html">Back to Map</a>
   </div>
-
-<script>
-  // Check earned badges and illuminate them
-  const badges = ["dino", "elmer", "castle", "icecream", "arcade"];
-
-  badges.forEach(b => {
-    const badge = document.getElementById("badge_" + b);
-    if (localStorage.getItem("badge_" + b) === "earned") {
-      badge.classList.add("earned");
-    }
-  });
-</script>
-
 </body>
 </html>
