@@ -1,22 +1,9 @@
-const missionButtons = document.querySelectorAll('.mission-btn');
+// map.js
+// NEW VERSION: All missions are always unlocked
 
-// Initialize unlocked missions if not set
-if(!localStorage.getItem('unlockedMissions')) {
-  localStorage.setItem('unlockedMissions', JSON.stringify(['mission1']));
-}
+console.log("Map loaded — all missions unlocked.");
 
-const unlocked = JSON.parse(localStorage.getItem('unlockedMissions'));
-
-missionButtons.forEach(btn => {
-  const mission = btn.getAttribute('data-mission');
-  const missionKey = mission.replace('.html', '');
-  
-  if(!unlocked.includes(missionKey)) {
-    btn.disabled = true;
-    btn.innerText += " (Locked)";
-  }
-
-  btn.addEventListener('click', () => {
-    window.location.href = mission;
-  });
-});
+// No mission locking logic.
+// No localStorage.
+// No checks.
+// Clean and simple.
