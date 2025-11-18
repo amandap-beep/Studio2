@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mission X</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
+</head>
+<body>
+  <h1 id="missionTitle">Mission X Title</h1>
+  <div id="dialogue"></div>
+  
+  <a-scene embedded arjs='sourceType: webcam;'>
+    <a-marker preset="hiro">
+      <a-image src="assets/icons/placeholder.png" position="0 0 0" scale="1 1 1"></a-image>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <button id="completeBtn" style="display:none;">Complete Mission</button>
+
+  <script src="js/dialogue.js"></script>
+  <script>
+    // Customize mission dialogue and next unlock
+    const missionData = {
+      missionTitle: "Mission 1: Dino Putt",
+      dialogueText: "Whoa! The Dinos are full of laughter but they’ve forgotten how to play! Help them get the giggles going again!",
+      nextMission: "mission2"
+    };
+
+    document.getElementById('missionTitle').innerText = missionData.missionTitle;
+
+    showDialogue('dialogue', missionData.dialogueText, 40, () => {
+      document.getElementById('completeBtn').style.display = 'block';
+    });
+
+    document.getElementById('completeBtn').addEventListener('click', () => {
+      const unlocked = JSON.parse(localStorage.getItem('unlockedMissions'));
+      if(!unlocked.includes(missionData.nextMission)) {
+        unlocked.push(missionData.nextMission);
+        localStorage.setItem('unlockedMissions', JSON.stringify(unlocked));
+      }
+      window.location.href = 'map.html';
+    });
+  </script>
+</body>
+</html>
