@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stellar's Wish Quest: Finale</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
+</head>
+<body>
+  <h1>Return to the Stars</h1>
+  <div id="dialogue"></div>
+
+  <a-scene embedded arjs='sourceType: webcam;'>
+    <a-marker preset="hiro">
+      <a-image src="assets/icons/stellar.png" position="0 0 0" scale="1 1 1"></a-image>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <button onclick="window.location.href='map.html'">See Your Star Trail</button>
+  <button onclick="alert('Share the Magic coming soon!')">Share the Magic</button>
+  <button onclick="window.location.href='index.html'">End Journey</button>
+
+  <script src="js/dialogue.js"></script>
+  <script>
+    showDialogue('dialogue', "You did it! You helped me fill the sky with new wishes. Every laugh, every smile, every memory… those are the stars that shine the longest. Remember—you’re part of the magic here forever!", 40);
+  </script>
+</body>
+</html>
