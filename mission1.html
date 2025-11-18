@@ -2,58 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Mission X</title>
+  <title>Mission 1: Dino Putt</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- AR libraries -->
   <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
+
 <body>
-  <h1 id="missionTitle">Mission X Title</h1>
+
+  <h1 id="missionTitle">Mission 1: Dino Putt</h1>
   <div id="dialogue"></div>
-  
-  <a-scene embedded arjs='sourceType: webcam;'>
+
+  <!-- AR Scene -->
+  <a-scene embedded arjs="sourceType: webcam;">
     <a-marker preset="hiro">
-      <a-image src="assets/icons/placeholder.png" position="0 0 0" scale="1 1 1"></a-image>
+      <a-image src="assets/icons/dino.png" position="0 0 0" scale="1 1 1"></a-image>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
 
+  <!-- Button appears after dialogue -->
   <button id="completeBtn" style="display:none;">Complete Mission</button>
 
+  <!-- Mission Complete Screen (hidden until mission done) -->
+  <div id="missionCompleteScreen" class="mission-complete" style="display:none;">
+    <h2 class="complete-title">Mission Complete!</h2>
+
+    <div class="badge-container">
+      <img src="assets/badges/badge_dino.png" alt="Dino Badge" class="badge-earned">
+    </div>
+
+    <p class="badge-text">You earned: <strong>The Spark of Laughter</strong></p>
+
+    <button class="map-button" onclick="goToMap()">Return to Map</button>
+
+    <canvas id="confetti-canvas"></canvas>
+  </div>
+
+  <!-- Dialogue typing script -->
   <script src="js/dialogue.js"></script>
+
+  <!-- Main Mission Script -->
   <script>
-    // Customize mission dialogue and next unlock
-    const missionData = {
-      missionTitle: "Mission 1: Dino Putt",
-      dialogueText: "Whoa! The Dinos are full of laughter but they’ve forgotten how to play! Help them get the giggles going again!",
-      nextMission: "mission2"
-    };
+    // -----------------------
+    // 1. Dialogue Setup
+    // -----------------------
+    const missionDialogue = 
+      "Whoa! The Dinos are full of laughter but they’ve forgotten how to play! Help them get the giggles going again!";
 
-    document.getElementById('missionTitle').innerText = missionData.missionTitle;
-
-    showDialogue('dialogue', missionData.dialogueText, 40, () => {
+    showDialogue('dialogue', missionDialogue, 40, () => {
       document.getElementById('completeBtn').style.display = 'block';
     });
 
+    // -----------------------
+    // 2. On Mission Complete
+    // -----------------------
     document.getElementById('completeBtn').addEventListener('click', () => {
-      const unlocked = JSON.parse(localStorage.getItem('unlockedMissions'));
-      if(!unlocked.includes(missionData.nextMission)) {
-        unlocked.push(missionData.nextMission);
-        localStorage.setItem('unlockedMissions', JSON.stringify(unlocked));
-      }
-      window.location.href = 'map.html';
+      // Hide AR + dialogue, show completion screen
+      document.querySelector('a-scene').style.display = "none";
+      document.getElementById('dialogue').style.display = "none";
+      document.getElementById('missionTitle').style.display = "none";
+      document.getElementById('completeBtn').style.display = "none";
+      document.getElementById('missionCompleteScreen').style.display = "block";
+
+      // Save mission + badge
+      localStorage.setItem("mission1", "true");
+      localStorage.setItem("badge_dino", "earned");
+
+      startConfetti();
     });
+
+    // -----------------------
+    // 3. Go Back to Map
+    // -----------------------
+    function goToMap() {
+      window.location.href = "map.html";
+    }
+
+    // -----------------------
+    // 4. Confetti Animation
+    // -----------------------
+    function startConfetti() {
+      const canvas = document.getElementById("confetti-canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const confetti = [];
+
+      for (let i = 0; i < 150; i++) {
+        confetti.push({
+          x: Math.random() * canvas.width,
+          y: -10,
+          size: Math.random() * 8 + 4,
+          speed: Math.random() * 3 + 2,
+          color: `hsl(${Math.random() * 360}, 80%, 60%)`
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        confetti.forEach(p => {
+          ctx.fillStyle = p.color;
+          ctx.fillRect(p.x, p.y, p.size, p.size);
+
+          p.y += p.speed;
+
+          if (p.y > canvas.height) {
+            p.y = -10;
+            p.x = Math.random() * canvas.width;
+          }
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    }
   </script>
 
-<!-- Mission complete screen / button goes here -->
-
-<script>
-  // Save this mission as completed
-  localStorage.setItem("mission1", "true");
-
-  // Award the badge for Mission 1 (Dino Putt)
-  localStorage.setItem("badge_dino", "earned");
-</script>
 </body>
 </html>
-
