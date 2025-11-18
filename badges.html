@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Badges</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="badge-container">
+    <h1>Your Wish Sparks</h1>
+
+    <div class="badge-grid">
+      <div class="badge" id="badge_dino">
+        <img src="assets/icons/dino.png">
+        <p>Spark of Laughter</p>
+      </div>
+
+      <div class="badge" id="badge_elmer">
+        <img src="assets/icons/elmer.png">
+        <p>Spark of Dreams</p>
+      </div>
+
+      <div class="badge" id="badge_castle">
+        <img src="assets/icons/castle.png">
+        <p>Spark of Hope</p>
+      </div>
+
+      <div class="badge" id="badge_icecream">
+        <img src="assets/icons/icecream.png">
+        <p>Spark of Joy</p>
+      </div>
+
+      <div class="badge" id="badge_arcade">
+        <img src="assets/icons/arcade.png">
+        <p>Spark of Play</p>
+      </div>
+    </div>
+
+    <a href="map.html" class="mission-btn">Back to Map</a>
+  </div>
+
+<script>
+  // Check earned badges and illuminate them
+  const badges = ["dino", "elmer", "castle", "icecream", "arcade"];
+
+  badges.forEach(b => {
+    const badge = document.getElementById("badge_" + b);
+    if (localStorage.getItem("badge_" + b) === "earned") {
+      badge.classList.add("earned");
+    }
+  });
+</script>
+
+</body>
+</html>
