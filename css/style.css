@@ -31,3 +31,40 @@ button:disabled {
   padding: 15px;
   border-radius: 10px;
 }
+.badge-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.badge img {
+  width: 100px;
+  opacity: 0.3;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.badge.locked img {
+  filter: grayscale(100%);
+}
+
+.badge.unlocked img {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.back-btn {
+  display: block;
+  margin-top: 30px;
+  text-decoration: none;
+  background: #6c5ce7;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
