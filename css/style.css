@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #f0f0f5;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.home-screen {
+  margin-top: 50px;
+}
+
+.stellar-icon {
+  width: 150px;
+}
+
+#dialogue {
+  margin: 20px;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 10px;
+}
